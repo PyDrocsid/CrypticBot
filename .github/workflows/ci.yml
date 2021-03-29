@@ -6,8 +6,8 @@ on:
 
 env:
   PYTHON_VERSION: 3.9
-  IMAGE_NAME: pydrocsid/bot
-  GHCR_NAME: pydrocsid/bot
+  IMAGE_NAME: defelo/crypticbot
+  GHCR_NAME: pydrocsid/crypticbot
 
 jobs:
   codestyle:
@@ -155,7 +155,7 @@ jobs:
           path: ${{ steps.archive.outputs.name }}
 
   docker_push:
-    if: "false" # ${{ github.event_name != 'pull_request' && github.actor != 'dependabot[bot]' }}
+    if: ${{ github.event_name != 'pull_request' && github.actor != 'dependabot[bot]' }}
     needs: [ docker_build ]
     environment: docker
     runs-on: ubuntu-latest

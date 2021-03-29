@@ -1,13 +1,6 @@
-# PyDrocsid Bot Template
+# CrypticBot
 
-## Template Instructions
-- [ ] Adjust name, repository and author in [config.yml](https://github.com/PyDrocsid/template/blob/develop/config.yml)
-- [ ] Replace the banner in [bot/pydrocsid_bot.py#L19](https://github.com/PyDrocsid/template/blob/develop/bot/pydrocsid_bot.py#L19). You can generate one on [this website](http://www.patorjk.com/software/taag/#p=display&f=Slant&t=PyDrocsid%20Bot).
-- [ ] Adjust repository in [Dockerfile#L21](https://github.com/PyDrocsid/template/blob/develop/Dockerfile#L21)
-- [ ] Adjust docker image tags in [.github/workflows/ci.yml#L9](https://github.com/PyDrocsid/template/blob/develop/.github/workflows/ci.yml#L9)
-- [ ] Enable push to docker registries in [.github/workflows/ci.yml#L158](https://github.com/PyDrocsid/template/blob/develop/.github/workflows/ci.yml#L158)
-- [ ] Add reviewers in [.github/dependabot.yml](https://github.com/PyDrocsid/template/blob/develop/.github/dependabot.yaml)
-- [ ] Adjust this [README.md](https://github.com/PyDrocsid/template/blob/develop/README.md) and remove this section
+Bot for the [Cryptic Discord Server](https://discord.gg/Anscdtp)
 
 ## Development
 ### Prerequisites
@@ -22,12 +15,12 @@
 
 #### SSH (recommended)
 ```
-git clone --recursive git@github.com:PyDrocsid/template.git
+git clone --recursive git@github.com:PyDrocsid/CrypticBot.git
 ```
 
 #### HTTPS
 ```
-git clone --recursive https://github.com/PyDrocsid/template.git
+git clone --recursive https://github.com/PyDrocsid/CrypticBot.git
 ```
 
 ### Setup dependencies
@@ -100,8 +93,8 @@ Finally, please remember to mark the `bot` directory as `Sources Root` (right cl
 ### Using Docker
 ```bash
 # clone git repository and cd into it
-git clone --recursive https://github.com/PyDrocsid/template.git
-cd template
+git clone --recursive https://github.com/PyDrocsid/CrypticBot.git
+cd CrypticBot
 
 # build docker image
 sudo docker build -t pydrocsid/bot .
@@ -158,6 +151,3 @@ pipenv run bot
 | SENTRY_DSN          | [Optional] Sentry DSN for logging                                                    |                  |
 | OWNER_ID            | [Optional] Discord User ID of the person who should recieve status information.      |                  |
 | DISABLED_COGS       | [Optional] Cogs you'd like to disable.                                               |                  |
-|                     |                                                                                      |                  |
-| AOC_SESSION         | [Optional] Session cookie of the [Advent of Code Website](https://adventofcode.com/) |                  |
-| AOC_REFRESH_INTERVAL| [Optional] Number of seconds after which the aoc cache is invalidated                | `900`            |

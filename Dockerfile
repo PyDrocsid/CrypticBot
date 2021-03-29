@@ -18,7 +18,7 @@ RUN git describe --tags --always > VERSION
 
 FROM python:3.9-alpine
 
-LABEL org.opencontainers.image.source=https://github.com/PyDrocsid/template
+LABEL org.opencontainers.image.source=https://github.com/PyDrocsid/CrypticBot
 
 RUN set -x \
     && apk add --no-cache bash~=5.1 \
