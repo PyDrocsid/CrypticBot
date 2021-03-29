@@ -35,4 +35,4 @@ COPY --from=builder /build/VERSION /app/
 COPY config.yml /app/
 COPY bot /app/bot/
 
-CMD ["python", "bot/pydrocsid_bot.py"]
+CMD ["python", "bot/cryptic_bot.py"]

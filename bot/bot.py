@@ -66,14 +66,33 @@ load_cogs(
     RolesCog(),
     PermissionsCog(),
     SettingsCog(),
+    SudoCog(),
+
+    # Moderation
+    InvitesCog(),
+    LoggingCog(),
+    MessageCog(),
+    ModCog(),
+    SpamDetectionCog(),
 
     # Information
     BotInfoCog(),
+    CodeblocksCog(),
+    HeartbeatCog(),
     HelpCog(),
+    MemberInfoCog(),
     CustomServerInfoCog(),
 
+    # Integrations
+    DiscordpyDocumentationCog(),
+    RedditCog(),
+    RunCodeCog(),
+
     # General
+    PollsCog(team_roles=["head", "assistant"]),
+    ReactionRoleCog(),
     UtilsCog(),
+    VoiceChannelCog(team_roles=["head", "head_assistant"]),
 )
 # fmt: on
 
