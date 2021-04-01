@@ -24,6 +24,10 @@ roles:
     name: Head Assistant
     check_assignable: false
 
+  server_admin:
+    name: Server Admin
+    check_assignable: false
+
   frontend:
     name: Frontend
     check_assignable: true
