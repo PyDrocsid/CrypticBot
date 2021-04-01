@@ -1,3 +1,11 @@
+<p>
+  
+  [![CI](https://github.com/PyDrocsid/CrypticBot/actions/workflows/ci.yml/badge.svg)](https://github.com/PyDrocsid/CrypticBot/actions/workflows/ci.yml)
+  [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+  [![DockerHub - template](https://img.shields.io/docker/pulls/defelo/crypticbot?style=flat-square&label=DockerHub%20-%20CrypticBot)](https://hub.docker.com/r/defelo/crypticbot)
+
+</p>
+
 # CrypticBot
 
 Bot for the [Cryptic Discord Server](https://discord.gg/Anscdtp)

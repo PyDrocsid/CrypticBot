@@ -69,10 +69,12 @@ load_cogs(
     SudoCog(),
 
     # Moderation
+    AutoRoleCog(),
     InvitesCog(),
     LoggingCog(),
     MessageCog(),
     ModCog(),
+    RoleNotificationsCog(),
     SpamDetectionCog(),
 
     # Information
@@ -80,8 +82,9 @@ load_cogs(
     CodeblocksCog(),
     HeartbeatCog(),
     HelpCog(),
-    MemberInfoCog(),
+    UserInfoCog(),
     CustomServerInfoCog(),
+    InactivityCog(),
 
     # Integrations
     DiscordpyDocumentationCog(),
