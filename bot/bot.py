@@ -82,7 +82,6 @@ load_cogs(
 
     # Information
     BotInfoCog(),
-    CodeblocksCog(),
     HeartbeatCog(),
     HelpCog(),
     UserInfoCog(),
@@ -95,7 +94,9 @@ load_cogs(
     RunCodeCog(),
 
     # General
-    CustomCommandsCog(),
+    CustomCommandsCog(
+        "bot/cogs/library/custom_commands/codeblocks.yml",
+    ),
     PollsCog(team_roles=["head", "assistant"]),
     ReactionRoleCog(),
     UtilsCog(),
