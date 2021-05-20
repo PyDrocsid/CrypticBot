@@ -96,6 +96,7 @@ load_cogs(
     # General
     CustomCommandsCog(
         "bot/cogs/library/custom_commands/codeblocks.yml",
+        "bot/cogs/custom/custom_commands/hm.yml",
     ),
     PollsCog(team_roles=["head", "assistant"]),
     ReactionRoleCog(),
