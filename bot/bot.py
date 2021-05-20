@@ -56,9 +56,9 @@ async def on_command_error(ctx: Context, error: CommandError):
     if isinstance(error, UserInputError):
         await send_help(ctx, ctx.command)
     elif isinstance(error, ModCommandError):
-        await reply(ctx, embed=make_error(error, error.user))
+        await reply(ctx, embed=make_error(str(error), error.user))
     else:
-        await reply(ctx, embed=make_error(error))
+        await reply(ctx, embed=make_error(str(error)))
 
 
 # fmt: off
@@ -95,6 +95,7 @@ load_cogs(
     RunCodeCog(),
 
     # General
+    CustomCommandsCog(),
     PollsCog(team_roles=["head", "assistant"]),
     ReactionRoleCog(),
     UtilsCog(),
