@@ -1,11 +1,13 @@
-hm:
-  aliases: []
+head_meeting:
+  aliases: [hm]
   disabled: false
-  permission_level: head
   description: Head Meeting notification
 
   channel_parameter: false
   channel: 454750853967118336
+  delete_command: false
+  public: false
+  requires_confirmation: true
 
   content: "<@&606183903035916320> Head meeting startet jetzt!"
   file:

@@ -88,7 +88,7 @@ permission_levels:
   administrator:
     name: Administrator
     level: 3
-    aliases: [admin, a]
+    aliases: [administrator, admin, a]
     if:
       permissions: [administrator]
       roles: [admin]
@@ -103,7 +103,7 @@ permission_levels:
   head_assistant:
     name: Head Assistant
     level: 1
-    aliases: [headassistant, ha]
+    aliases: [head_assistant, headassistant, ha]
     if:
       roles: [head_assistant]
 

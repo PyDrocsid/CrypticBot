@@ -5,16 +5,17 @@ from discord import Intents, Message
 from discord.ext.commands import Bot, Context, CommandError, CommandNotFound, UserInputError, CommandInvokeError
 
 from PyDrocsid.cog import load_cogs
+from PyDrocsid.command import reply, make_error
 from PyDrocsid.database import db
 from PyDrocsid.environment import TOKEN
 from PyDrocsid.events import listener
 from PyDrocsid.logger import get_logger
+from PyDrocsid.prefix import get_prefix
 from PyDrocsid.translations import t
-from PyDrocsid.util import get_prefix, make_error, reply
 from cogs.custom import CustomServerInfoCog
 from cogs.library import *
 from cogs.library.information.help.cog import send_help
-from cogs.library.moderation.mod.cog import ModCommandError
+from cogs.library.moderation.mod.cog import UserCommandError
 
 logger = get_logger(__name__)
 
@@ -55,7 +56,7 @@ async def on_command_error(ctx: Context, error: CommandError):
         return
     if isinstance(error, UserInputError):
         await send_help(ctx, ctx.command)
-    elif isinstance(error, ModCommandError):
+    elif isinstance(error, UserCommandError):
         await reply(ctx, embed=make_error(str(error), error.user))
     else:
         await reply(ctx, embed=make_error(str(error)))
@@ -95,6 +96,7 @@ load_cogs(
 
     # General
     CustomCommandsCog(
+        "custom_commands",
         "bot/cogs/library/custom_commands/codeblocks.yml",
         "bot/cogs/custom/custom_commands/hm.yml",
     ),
