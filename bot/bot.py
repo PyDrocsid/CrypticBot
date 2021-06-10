@@ -104,6 +104,7 @@ load_cogs(
     CustomCommandsCog(
         "custom_commands",
         "bot/cogs/library/custom_commands/codeblocks.yml",
+        "bot/cogs/library/custom_commands/metaquestion.yml",
         "bot/cogs/custom/custom_commands/hm.yml",
     ),
     PollsCog(team_roles=["head", "assistant"]),
