@@ -96,7 +96,7 @@ permission_levels:
   head:
     name: Head
     level: 2
-    aliases: [h]
+    aliases: [head, h]
     if:
       roles: [head]
 
