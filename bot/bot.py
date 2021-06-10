@@ -88,7 +88,7 @@ load_cogs(
     SpamDetectionCog(),
 
     # Information
-    BotInfoCog(),
+    BotInfoCog(info_icon="https://github.com/cryptic-game.png"),
     HeartbeatCog(),
     HelpCog(),
     UserInfoCog(),
