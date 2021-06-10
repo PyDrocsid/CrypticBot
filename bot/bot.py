@@ -107,7 +107,7 @@ load_cogs(
         "bot/cogs/library/custom_commands/metaquestion.yml",
         "bot/cogs/custom/custom_commands/hm.yml",
     ),
-    PollsCog(team_roles=["head", "assistant"]),
+    PollsCog(team_roles=["head", "head_assistant"]),
     ReactionRoleCog(),
     UtilsCog(),
     VoiceChannelCog(team_roles=["head", "head_assistant"]),
