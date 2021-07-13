@@ -101,12 +101,7 @@ load_cogs(
     RunCodeCog(),
 
     # General
-    CustomCommandsCog(
-        "custom_commands",
-        "bot/cogs/library/custom_commands/codeblocks.yml",
-        "bot/cogs/library/custom_commands/metaquestion.yml",
-        "bot/cogs/custom/custom_commands/hm.yml",
-    ),
+    CustomCommandsCog(),
     PollsCog(team_roles=["head", "head_assistant"]),
     ReactionRoleCog(),
     UtilsCog(),

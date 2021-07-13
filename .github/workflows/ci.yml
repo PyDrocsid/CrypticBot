@@ -68,7 +68,7 @@ jobs:
         uses: docker/setup-qemu-action@v1.2.0
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1.3.0
+        uses: docker/setup-buildx-action@v1.5.1
 
       - name: Cache Docker layers
         uses: actions/cache@v2.1.6
@@ -119,7 +119,7 @@ jobs:
           echo ::set-output name=tags::${out:1}
 
       - name: Build
-        uses: docker/build-push-action@v2.5.0
+        uses: docker/build-push-action@v2.6.1
         with:
           push: false
           load: true
@@ -153,8 +153,55 @@ jobs:
           path: ${{ steps.archive.outputs.name }}
           retention-days: 1
 
-  docker_push:
+  docker_push_ghcr:
     if: ${{ github.event_name != 'pull_request' && github.actor != 'dependabot[bot]' }}
+    needs: [ codestyle, linter, docker_build ]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download Docker Image Archive
+        uses: actions/download-artifact@v2
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1.10.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.github_token }}
+
+      - name: Push Docker Image
+        run: |
+          set -ex
+
+          for file in $(ls */*); do
+            echo Loading $file
+            docker load -qi $file | cut -d' ' -f3 | grep '^ghcr.io/' | xargs -L1 docker push
+          done
+
+      - name: Clear
+        if: always()
+        run: rm -f ${HOME}/.docker/config.json
+
+#     - name: Prune old Docker Images
+#       env:
+#         TOKEN: ${{ secrets.CR_PAT }}
+#         USER: "orgs/pydrocsid"
+#         NAME: "crypticbot"
+#       run: |
+#         set -ex
+
+#         AUTH="Authorization: Bearer ${TOKEN}"
+#         URL="https://api.github.com/${USER}/packages/container/${NAME}/versions"
+
+#         for version in $(curl -H "${AUTH}" "${URL}" | jq -c '.[] | select(.metadata.container.tags==[])'); do
+#             id=$(echo "${version}" | jq -r .id)
+#             name=$(echo "${version}" | jq -r .name)
+#             echo pruning $id $name
+#             curl -X DELETE -H "${AUTH}" "${URL}/${id}"
+#         done
+
+  docker_push_dockerhub:
+    if: ${{ startsWith(github.ref, 'refs/tags/v') || github.ref == 'refs/heads/develop' }}
     needs: [ codestyle, linter, docker_build ]
     environment: docker
     runs-on: ubuntu-latest
@@ -166,66 +213,19 @@ jobs:
       - name: Login to DockerHub
         id: login_dockerhub
         uses: docker/login-action@v1.10.0
-        env:
-          USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-          PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
-        if: ${{ startsWith(github.ref, 'refs/tags/v') || github.ref == 'refs/heads/develop' }}
         with:
-          username: ${{ env.USERNAME }}
-          password: ${{ env.PASSWORD }}
-
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v1.10.0
-        env:
-          USERNAME: ${{ github.repository_owner }}
-          PASSWORD: ${{ secrets.CR_PAT }}
-        with:
-          registry: ghcr.io
-          username: ${{ env.USERNAME }}
-          password: ${{ env.PASSWORD }}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       - name: Push Docker Image
-        env:
-          NAME: ${{ steps.archive.outputs.name }}
         run: |
           set -ex
 
           for file in $(ls */*); do
             echo Loading $file
-            docker load -qi $file | cut -d' ' -f3 | xargs -L1 docker push
+            docker load -qi $file | cut -d' ' -f3 | grep -v '^ghcr.io/' | xargs -L1 docker push
           done
 
       - name: Clear
         if: always()
         run: rm -f ${HOME}/.docker/config.json
-
-      - name: Prune old Docker Images
-        env:
-          TOKEN: ${{ secrets.CR_PAT }}
-          USER: "orgs/pydrocsid"
-          NAME: "crypticbot"
-        run: |
-          set -ex
-
-          AUTH="Authorization: Bearer ${TOKEN}"
-          URL="https://api.github.com/${USER}/packages/container/${NAME}/versions"
-
-          for version in $(curl -H "${AUTH}" "${URL}" | jq -c '.[] | select(.metadata.container.tags==[])'); do
-              id=$(echo "${version}" | jq -r .id)
-              name=$(echo "${version}" | jq -r .name)
-              echo pruning $id $name
-              curl -X DELETE -H "${AUTH}" "${URL}/${id}"
-          done
-
-#  docker_deploy:
-#    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/develop' }}
-#    needs: [ docker_push ]
-#    environment: server-test
-#    runs-on: ubuntu-latest
-#
-#    steps:
-#      - name: Deploy
-#        env:
-#          CREDENTIALS: ${{ secrets.UPDATE_CREDENTIALS }}
-#          URL: ${{ secrets.UPDATE_URL }}
-#        run: curl -u $CREDENTIALS $URL
