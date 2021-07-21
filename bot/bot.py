@@ -1,19 +1,22 @@
 from typing import Iterable
 
 import sentry_sdk
-from discord import Intents, Message
+from discord import Intents, Message, Guild
 from discord.ext.commands import Bot, Context, CommandError, CommandNotFound, UserInputError, CommandInvokeError
 
 from PyDrocsid.cog import load_cogs
+from PyDrocsid.command import reply, make_error
 from PyDrocsid.database import db
 from PyDrocsid.environment import TOKEN
 from PyDrocsid.events import listener
 from PyDrocsid.logger import get_logger
+from PyDrocsid.prefix import get_prefix
 from PyDrocsid.translations import t
-from PyDrocsid.util import get_prefix, make_error, reply
 from cogs.custom import CustomServerInfoCog
 from cogs.library import *
 from cogs.library.information.help.cog import send_help
+from cogs.library.moderation.mod.cog import UserCommandError
+from cogs.library.pubsub import send_alert
 
 logger = get_logger(__name__)
 
@@ -54,8 +57,15 @@ async def on_command_error(ctx: Context, error: CommandError):
         return
     if isinstance(error, UserInputError):
         await send_help(ctx, ctx.command)
+    elif isinstance(error, UserCommandError):
+        await reply(ctx, embed=make_error(str(error), error.user))
     else:
-        await reply(ctx, embed=make_error(error))
+        await reply(ctx, embed=make_error(str(error)))
+
+
+@listener
+async def on_permission_error(guild: Guild, error: str):
+    await send_alert(guild, error)
 
 
 # fmt: off
@@ -66,14 +76,36 @@ load_cogs(
     RolesCog(),
     PermissionsCog(),
     SettingsCog(),
+    SudoCog(),
+
+    # Moderation
+    AutoRoleCog(),
+    InvitesCog(),
+    LoggingCog(),
+    MessageCog(),
+    ModCog(),
+    RoleNotificationsCog(),
+    SpamDetectionCog(),
 
     # Information
-    BotInfoCog(),
+    BotInfoCog(info_icon="https://github.com/cryptic-game.png"),
+    HeartbeatCog(),
     HelpCog(),
+    UserInfoCog(),
     CustomServerInfoCog(),
+    InactivityCog(),
+
+    # Integrations
+    DiscordpyDocumentationCog(),
+    RedditCog(),
+    RunCodeCog(),
 
     # General
+    CustomCommandsCog(),
+    PollsCog(team_roles=["head", "head_assistant"]),
+    ReactionRoleCog(),
     UtilsCog(),
+    VoiceChannelCog(team_roles=["head", "head_assistant"]),
 )
 # fmt: on
 

@@ -1,8 +1,8 @@
-name: PyDrocsid Bot
+name: Cryptic Bot
 
 repo:
   owner: PyDrocsid
-  name: template
+  name: CrypticBot
   icon: "https://github.com/Defelo.png"
 
 author: Defelo
@@ -16,9 +16,69 @@ roles:
     name: Administrator
     check_assignable: false
 
-  mod:
-    name: Moderator
+  head:
+    name: Head
     check_assignable: false
+
+  head_assistant:
+    name: Head Assistant
+    check_assignable: false
+
+  server_admin:
+    name: Server Admin
+    check_assignable: false
+
+  frontend:
+    name: Frontend
+    check_assignable: true
+
+  backend:
+    name: Backend
+    check_assignable: true
+
+  qm:
+    name: Quality Management
+    check_assignable: true
+
+  gamedesign:
+    name: Gamedesign
+    check_assignable: true
+
+  design:
+    name: Design
+    check_assignable: true
+
+  website:
+    name: Website
+    check_assignable: true
+
+  social_media:
+    name: Social Media
+    check_assignable: true
+
+  wiki:
+    name: Wiki
+    check_assignable: true
+
+  security:
+    name: Security
+    check_assignable: true
+
+  correction:
+    name: Correction
+    check_assignable: true
+
+  text:
+    name: Text
+    check_assignable: true
+
+  translator:
+    name: Translator
+    check_assignable: true
+
+  notification:
+    name: Notification
+    check_assignable: true
 
   mute:
     name: Mute
@@ -27,18 +87,25 @@ roles:
 permission_levels:
   administrator:
     name: Administrator
-    level: 2
-    aliases: [admin, a]
+    level: 3
+    aliases: [administrator, admin, a]
     if:
       permissions: [administrator]
       roles: [admin]
 
-  moderator:
-    name: Moderator
-    level: 1
-    aliases: [mod, m]
+  head:
+    name: Head
+    level: 2
+    aliases: [head, h]
     if:
-      roles: [mod]
+      roles: [head]
+
+  head_assistant:
+    name: Head Assistant
+    level: 1
+    aliases: [head_assistant, headassistant, ha]
+    if:
+      roles: [head_assistant]
 
 default_permission_level: administrator
 default_permission_overrides:
@@ -48,4 +115,4 @@ default_permission_overrides:
     stop: owner
     kill: owner
 
-teamler_level: moderator
+teamler_level: head_assistant
