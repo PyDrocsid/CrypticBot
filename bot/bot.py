@@ -96,7 +96,7 @@ load_cogs(
     InactivityCog(),
 
     # Integrations
-    DiscordpyDocumentationCog(),
+    PythonDocsCog(),
     RedditCog(),
     RunCodeCog(),
 
