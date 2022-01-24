@@ -86,6 +86,7 @@ load_cogs(
     ModCog(),
     RoleNotificationsCog(),
     SpamDetectionCog(),
+    ThreadsCog(),
 
     # Information
     BotInfoCog(info_icon="https://github.com/cryptic-game.png"),

@@ -2,9 +2,9 @@ version: '3.9'
 
 
 services:
-  bot:
-    image: pydrocsid/bot
-#   image: pydrocsid/bot:develop
+  crypticbot:
+    image: ghcr.io/pydrocsid/crypticbot
+#   image: ghcr.io/pydrocsid/crypticbot:develop
     restart: always
     tty: true
     env_file: bot.env
