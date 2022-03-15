@@ -24,7 +24,7 @@ print(
               /____/_/
 
     """
-    "\033[0m",
+    "\033[0m"
 )
 
 logger.info(f"Starting {Config.NAME} v{Config.VERSION} ({Config.REPO_LINK})\n")
