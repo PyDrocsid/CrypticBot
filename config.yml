@@ -28,6 +28,10 @@ roles:
     name: Head Assistant
     check_assignable: false
 
+  supporter:
+    name: Supporter
+    check_assignable: false
+
   server_admin:
     name: Server Admin
     check_assignable: false
@@ -95,7 +99,7 @@ roles:
 permission_levels:
   administrator:
     name: Administrator
-    level: 3
+    level: 4
     aliases: [administrator, admin, a]
     if:
       permissions: [administrator]
@@ -103,17 +107,24 @@ permission_levels:
 
   head:
     name: Head
-    level: 2
+    level: 3
     aliases: [head, h]
     if:
       roles: [head]
 
   head_assistant:
     name: Head Assistant
-    level: 1
+    level: 2
     aliases: [head_assistant, headassistant, ha]
     if:
       roles: [head_assistant]
+
+  supporter:
+    name: Supporter
+    level: 1
+    aliases: [supporter, supp, s]
+    if:
+      roles: [supporter]
 
 default_permission_level: administrator
 default_permission_overrides:
