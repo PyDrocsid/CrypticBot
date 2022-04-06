@@ -2,8 +2,10 @@
   
   [![CI](https://github.com/PyDrocsid/CrypticBot/actions/workflows/ci.yml/badge.svg)](https://github.com/PyDrocsid/CrypticBot/actions/workflows/ci.yml)
   [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-  [![DockerHub - template](https://img.shields.io/docker/pulls/defelo/crypticbot?style=flat-square&label=DockerHub%20-%20CrypticBot)](https://hub.docker.com/r/defelo/crypticbot)
-  [![Discord](https://img.shields.io/discord/637234990404599809.svg?label=Discord&logo=discord&logoColor=ffffff&color=7389D8)](https://discord.gg/zcmkZVC)
+  [![Maintainability](https://api.codeclimate.com/v1/badges/5e1c20d3c01df6f371f2/maintainability)](https://codeclimate.com/github/PyDrocsid/CrypticBot/maintainability)
+  [![Version](https://img.shields.io/github/v/tag/PyDrocsid/CrypticBot?label=version)](https://ghcr.io/pydrocsid/morpheushelper)
+  [![Discord](https://img.shields.io/discord/637234990404599809.svg?label=Discord&logo=discord&logoColor=ffffff&color=7389D8)](https://pydrocsid.defelo.de/discord)
+  [![Matrix](https://img.shields.io/matrix/pydrocsid:matrix.defelo.de.svg?label=Matrix&logo=matrix&logoColor=ffffff&color=4db798)](https://pydrocsid.defelo.de/matrix)
 
 </p>
 
@@ -13,35 +15,37 @@ Bot for the [Cryptic Discord Server](https://discord.gg/Anscdtp)
 
 ## Development
 ### Prerequisites
-- [Python](https://python.org/) >=3.9
-- [Pipenv](https://github.com/pypa/pipenv/)
+- [Python 3.10](https://python.org/)
+- [Poetry](https://python-poetry.org/) + [poethepoet](https://pypi.org/project/poethepoet/)
 - [Git](https://git-scm.com/)
-- [Docker](https://www.docker.com/) (recommended)
-- [docker-compose](https://docs.docker.com/compose/) (recommended)
+- [Docker](https://www.docker.com/) + [docker-compose](https://docs.docker.com/compose/) (recommended)
 - [PyCharm Community/Professional](https://www.jetbrains.com/pycharm/) (recommended)
 
 ### Clone the repository
 
 #### SSH (recommended)
-```
+```bash
 git clone --recursive git@github.com:PyDrocsid/CrypticBot.git
 ```
 
 #### HTTPS
-```
+```bash
 git clone --recursive https://github.com/PyDrocsid/CrypticBot.git
 ```
 
-### Setup dependencies
+### Setup development environment
 
-After you have cloned the repository, you should create a virtual environment and install all dependencies. For this you can use the following command:
+After cloning the repository, you can setup the development environment by running the following command:
 
+```bash
+poe setup
 ```
-pipenv install --dev
-```
+
+This will create a virtual environment, install the dependencies, create a `.env` file and install the pre-commit hook.
+
 
 ### Environment variables
-To set the required environment variables it is necessary to create a file named `.env` in the root directory (there is a template for this file in [`bot.env`](bot.env)). If you need a token, generate one by following these instructions: [Creating a Bot Account](https://discordpy.readthedocs.io/en/latest/discord.html) (Note you need to enable the options under `Privileged Gateway Intents`)
+To set the required environment variables it is necessary to create a file named `.env` in the root directory (there is a template for this file in [`bot.env`](bot.env)). If you need a token, generate one by following these instructions: [Creating a Bot Account](https://docs.pycord.dev/en/master/discord.html) (Note you need to enable the options under `Privileged Gateway Intents`)
 
 ### Project structure
 
@@ -77,10 +81,11 @@ Project
 │  │     │     ├── permissions.py
 │  │     │     └── settings.py
 │  │     ├── contributor.py
+│  │     ├── pubsub.md
 │  │     ├── pubsub.py
 │  │     └── translations.py
 │  ├── bot.py
-│  └── pydrocsid_bot.py
+│  └── cryptic_bot.py
 └── config.yml
  ```
 
@@ -89,8 +94,8 @@ Project
 - Open PyCharm and go to `Settings` ➔ `Project` ➔ `Python Interpreter`
 - Open the menu `Python Interpreter` and click on `Show All...`
 - Click on the plus symbol
-- Click on `Pipenv Environment`
-- Select `Python 3.9` as `Base interpreter`
+- Click on `Poetry Environment`
+- Select `Existing environment` (setup the environment first by running `poe setup`)
 - Confirm with `OK`
 - Change the working directory to root path  ➔ `Edit Configurations`  ➔ `Working directory`
 
@@ -107,9 +112,9 @@ git clone --recursive https://github.com/PyDrocsid/CrypticBot.git
 cd CrypticBot
 
 # build docker image
-sudo docker build -t pydrocsid/bot .
+sudo docker build -t pydrocsid/crypticbot .
 
-# adjust the docker-compose.yml and create the .env file
+# adjust the docker-compose.yml and create a .env file
 cp bot.env .env
 vim .env
 vim docker-compose.yml
@@ -120,14 +125,14 @@ sudo docker-compose up -d
 
 ### Local installation
 ```bash
-# install pipenv
-pip install pipenv
+# install poetry and poethepoet
+pip install poetry poethepoet
 
 # create virtual environment and install requirements
-pipenv install
+poetry install --no-root --no-dev
 
 # start the bot
-pipenv run bot
+poe bot
 ```
 
 ### Environment variables

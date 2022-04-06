@@ -1,22 +1,36 @@
 from typing import Iterable
 
 import sentry_sdk
-from discord import Intents, Message, Guild
-from discord.ext.commands import Bot, Context, CommandError, CommandNotFound, UserInputError, CommandInvokeError
+from discord import Guild, Intents, Message
+from discord.ext.commands import Bot, CommandError, CommandInvokeError, CommandNotFound, Context, UserInputError
 
 from PyDrocsid.cog import load_cogs
-from PyDrocsid.command import reply, make_error
+from PyDrocsid.command import make_error, reply
 from PyDrocsid.database import db
 from PyDrocsid.environment import TOKEN
 from PyDrocsid.events import listener
 from PyDrocsid.logger import get_logger
 from PyDrocsid.prefix import get_prefix
 from PyDrocsid.translations import t
-from cogs.custom import CustomServerInfoCog
-from cogs.library import *
-from cogs.library.information.help.cog import send_help
-from cogs.library.moderation.mod.cog import UserCommandError
+
+from cogs.custom.server_info import CustomServerInfoCog
+from cogs.library.administration import PermissionsCog, RolesCog, SettingsCog, SudoCog
+from cogs.library.general import CustomCommandsCog, PollsCog, ReactionRoleCog, UtilsCog, VoiceChannelCog
+from cogs.library.information import BotInfoCog, HeartbeatCog, InactivityCog, UserInfoCog
+from cogs.library.information.help.cog import HelpCog, send_help
+from cogs.library.integrations import PythonDocsCog, RedditCog, RunCodeCog
+from cogs.library.moderation import (
+    AutoRoleCog,
+    InvitesCog,
+    LoggingCog,
+    MessageCog,
+    RoleNotificationsCog,
+    SpamDetectionCog,
+    ThreadsCog,
+)
+from cogs.library.moderation.mod.cog import ModCog, UserCommandError
 from cogs.library.pubsub import send_alert
+
 
 logger = get_logger(__name__)
 
