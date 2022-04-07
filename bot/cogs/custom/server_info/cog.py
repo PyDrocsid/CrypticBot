@@ -21,7 +21,11 @@ class CustomServerInfoCog(ServerInfoCog, name="Server Information"):
         role: Role
         if (role := await get_role("admin")) is not None and role.members:
             out.append((t.cnt_admins(cnt=len(role.members)), role.members))
-        if (role := await get_role("mod")) is not None and role.members:
-            out.append((t.cnt_mods(cnt=len(role.members)), role.members))
+        if (role := await get_role("head")) is not None and role.members:
+            out.append((t.cnt_heads(cnt=len(role.members)), role.members))
+        if (role := await get_role("head_assistant")) is not None and role.members:
+            out.append((t.cnt_head_assistants(cnt=len(role.members)), role.members))
+        if (role := await get_role("server_admin")) is not None and role.members:
+            out.append((t.cnt_server_admins(cnt=len(role.members)), role.members))
 
         return out
