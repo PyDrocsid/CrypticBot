@@ -6,7 +6,7 @@ on:
 
 env:
   PYTHON_VERSION: "3.10"
-  IMAGE_NAME: pydrocsid/template
+  IMAGE_NAME: pydrocsid/crypticbot
 
 jobs:
   codestyle:
@@ -163,7 +163,7 @@ jobs:
 
   docker_push:
     name: Docker Push
-    if: "false" # ${{ github.event_name != 'pull_request' && github.actor != 'dependabot[bot]' && github.ref != 'refs/heads/template' }}
+    if: ${{ github.event_name != 'pull_request' && github.actor != 'dependabot[bot]' && github.ref != 'refs/heads/template' }}
     needs: [ codestyle, linter, docker_build ]
     concurrency: docker
     runs-on: ubuntu-latest
@@ -223,16 +223,16 @@ jobs:
         if: always()
         run: rm -f ${HOME}/.docker/config.json
 
-  docker_deploy:
-    name: Docker Deploy
-    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/develop' }}
-    needs: [ docker_push ]
-    environment: server-test
-    runs-on: ubuntu-latest
+# docker_deploy:
+#   name: Docker Deploy
+#   if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/develop' }}
+#   needs: [ docker_push ]
+#   environment: server-test
+#   runs-on: ubuntu-latest
 
-    steps:
-      - name: Deploy
-        env:
-          CREDENTIALS: ${{ secrets.UPDATE_CREDENTIALS }}
-          URL: ${{ secrets.UPDATE_URL }}
-        run: curl -u $CREDENTIALS $URL
+#   steps:
+#     - name: Deploy
+#       env:
+#         CREDENTIALS: ${{ secrets.UPDATE_CREDENTIALS }}
+#         URL: ${{ secrets.UPDATE_URL }}
+#       run: curl -u $CREDENTIALS $URL
