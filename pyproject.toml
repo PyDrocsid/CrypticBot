@@ -1,12 +1,12 @@
 [tool.poetry]
-name = "template"
+name = "CrypticBot"
 version = "0"
 description = ""
 authors = ["Defelo <elodef42@gmail.com>"]
 readme = "README.md"
 license = "GPL-3.0-only"
-homepage = "https://github.com/PyDrocsid/template"
-repository = "https://github.com/PyDrocsid/template"
+homepage = "https://github.com/PyDrocsid/CrypticBot"
+repository = "https://github.com/PyDrocsid/CrypticBot"
 
 [tool.poetry.dependencies]
 python = "^3.10"
@@ -28,7 +28,7 @@ types-requests = "^2.27.15"
 types-PyYAML = "^6.0.5"
 
 [tool.poe.tasks]
-bot = { cmd = "python bot/pydrocsid_bot.py", envfile = ".env" }
+bot = { cmd = "python bot/cryptic_bot.py", envfile = ".env" }
 flake8 = "flake8 . --count --statistics --show-source"
 isort = "isort ."
 black = "black ."

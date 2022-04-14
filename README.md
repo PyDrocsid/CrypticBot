@@ -1,25 +1,17 @@
 <p>
   
-  [![CI](https://github.com/PyDrocsid/template/actions/workflows/ci.yml/badge.svg)](https://github.com/PyDrocsid/template/actions/workflows/ci.yml)
+  [![CI](https://github.com/PyDrocsid/CrypticBot/actions/workflows/ci.yml/badge.svg)](https://github.com/PyDrocsid/CrypticBot/actions/workflows/ci.yml)
   [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-  [![Maintainability](https://api.codeclimate.com/v1/badges/cf9f606da13c20077022/maintainability)](https://codeclimate.com/github/PyDrocsid/library/maintainability)
+  [![Maintainability](https://api.codeclimate.com/v1/badges/5e1c20d3c01df6f371f2/maintainability)](https://codeclimate.com/github/PyDrocsid/CrypticBot/maintainability)
+  [![Version](https://img.shields.io/github/v/tag/PyDrocsid/CrypticBot?label=version)](https://ghcr.io/pydrocsid/crypticbot)
   [![Discord](https://img.shields.io/discord/637234990404599809.svg?label=Discord&logo=discord&logoColor=ffffff&color=7389D8)](https://pydrocsid.defelo.de/discord)
   [![Matrix](https://img.shields.io/matrix/pydrocsid:matrix.defelo.de.svg?label=Matrix&logo=matrix&logoColor=ffffff&color=4db798)](https://pydrocsid.defelo.de/matrix)
 
 </p>
 
-# PyDrocsid Bot Template
+# CrypticBot
 
-## Template Instructions
-- [ ] Adjust name, repository and author in [config.yml](https://github.com/PyDrocsid/template/blob/develop/config.yml)
-- [ ] Replace the banner in [bot/pydrocsid_bot.py#L19](https://github.com/PyDrocsid/template/blob/develop/bot/pydrocsid_bot.py#L19-L25). You can generate one on [this website](http://www.patorjk.com/software/taag/#p=display&f=Slant&t=PyDrocsid%20Bot).
-- [ ] Add the cogs you want to use in [bot/bot.py#L80](https://github.com/PyDrocsid/template/blob/develop/bot/bot.py#L76-L91).
-- [ ] Adjust repository in [Dockerfile#L22](https://github.com/PyDrocsid/template/blob/develop/Dockerfile#L22)
-- [ ] Adjust docker image tags in [.github/workflows/ci.yml#L9](https://github.com/PyDrocsid/template/blob/develop/.github/workflows/ci.yml#L9)
-- [ ] Enable push to docker registries in [.github/workflows/ci.yml#L166](https://github.com/PyDrocsid/template/blob/develop/.github/workflows/ci.yml#L166)
-- [ ] Add reviewers in [.github/dependabot.yaml](https://github.com/PyDrocsid/template/blob/develop/.github/dependabot.yaml)
-- [ ] Enable the [Merge Template workflow](https://github.com/PyDrocsid/template/blob/develop/.github/workflows/merge_template.yml)
-- [ ] Adjust this [README.md](https://github.com/PyDrocsid/template/blob/develop/README.md) and remove this section
+Bot for the [Cryptic Discord Server](https://discord.gg/Anscdtp)
 
 ## Development
 ### Prerequisites
@@ -33,12 +25,12 @@
 
 #### SSH (recommended)
 ```bash
-git clone --recursive git@github.com:PyDrocsid/template.git
+git clone --recursive git@github.com:PyDrocsid/CrypticBot.git
 ```
 
 #### HTTPS
 ```bash
-git clone --recursive https://github.com/PyDrocsid/template.git
+git clone --recursive https://github.com/PyDrocsid/CrypticBot.git
 ```
 
 ### Setup development environment
@@ -93,7 +85,7 @@ Project
 │  │     ├── pubsub.py
 │  │     └── translations.py
 │  ├── bot.py
-│  └── pydrocsid_bot.py
+│  └── cryptic_bot.py
 └── config.yml
  ```
 
@@ -116,11 +108,11 @@ Finally, please remember to mark the `bot` directory as `Sources Root` (right cl
 ### Using Docker
 ```bash
 # clone git repository and cd into it
-git clone --recursive https://github.com/PyDrocsid/template.git
-cd template
+git clone --recursive https://github.com/PyDrocsid/CrypticBot.git
+cd CrypticBot
 
 # build docker image
-sudo docker build -t pydrocsid/template .
+sudo docker build -t pydrocsid/crypticbot .
 
 # adjust the docker-compose.yml and create a .env file
 cp bot.env .env
@@ -174,4 +166,3 @@ poe bot
 | SENTRY_DSN          | [Optional] Sentry DSN for logging                                                    |                  |
 | OWNER_ID            | [Optional] Discord User ID of the person who should recieve status information.      |                  |
 | DISABLED_COGS       | [Optional] Cogs you'd like to disable.                                               |                  |
-|                     |                                                                                      |                  |
