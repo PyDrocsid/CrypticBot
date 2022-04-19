@@ -14,11 +14,21 @@ from PyDrocsid.prefix import get_prefix
 from PyDrocsid.translations import t
 
 from cogs.custom.server_info import CustomServerInfoCog
-from cogs.library.administration import PermissionsCog, RolesCog, SettingsCog
-from cogs.library.general import UtilsCog
-from cogs.library.information import BotInfoCog
+from cogs.library.administration import PermissionsCog, RolesCog, SettingsCog, SudoCog
+from cogs.library.general import CustomCommandsCog, PollsCog, ReactionRoleCog, UtilsCog, VoiceChannelCog
+from cogs.library.information import BotInfoCog, HeartbeatCog, InactivityCog, UserInfoCog
 from cogs.library.information.help.cog import HelpCog, send_help
-from cogs.library.moderation.mod.cog import UserCommandError
+from cogs.library.integrations import PythonDocsCog, RedditCog, RunCodeCog
+from cogs.library.moderation import (
+    AutoRoleCog,
+    InvitesCog,
+    LoggingCog,
+    MessageCog,
+    RoleNotificationsCog,
+    SpamDetectionCog,
+    ThreadsCog,
+)
+from cogs.library.moderation.mod.cog import ModCog, UserCommandError
 from cogs.library.pubsub import send_alert
 
 
@@ -80,14 +90,37 @@ load_cogs(
     RolesCog(),
     PermissionsCog(),
     SettingsCog(),
+    SudoCog(),
+
+    # Moderation
+    AutoRoleCog(),
+    InvitesCog(),
+    LoggingCog(),
+    MessageCog(),
+    ModCog(),
+    RoleNotificationsCog(),
+    SpamDetectionCog(),
+    ThreadsCog(),
 
     # Information
-    BotInfoCog(),
+    BotInfoCog(info_icon="https://github.com/cryptic-game.png"),
+    HeartbeatCog(),
     HelpCog(),
+    UserInfoCog(),
     CustomServerInfoCog(),
+    InactivityCog(),
+
+    # Integrations
+    PythonDocsCog(),
+    RedditCog(),
+    RunCodeCog(),
 
     # General
+    CustomCommandsCog(),
+    PollsCog(team_roles=["head", "head_assistant"]),
+    ReactionRoleCog(),
     UtilsCog(),
+    VoiceChannelCog(team_roles=["head", "head_assistant"]),
 )
 # fmt: on
 
