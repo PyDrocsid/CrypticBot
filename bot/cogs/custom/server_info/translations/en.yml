@@ -1,6 +1,12 @@
 cnt_admins:
   one: "{cnt} Administrator"
   many: "{cnt} Administrators"
-cnt_mods:
-  one: "{cnt} Moderator"
-  many: "{cnt} Moderators"
+cnt_heads:
+  one: "{cnt} Head"
+  many: "{cnt} Heads"
+cnt_head_assistants:
+  one: "{cnt} Head Assistant"
+  many: "{cnt} Head Assistants"
+cnt_server_admins:
+  one: "{cnt} Server Admin"
+  many: "{cnt} Server Admins"
